@@ -1,0 +1,21 @@
+extends layout
+
+block content
+	a(href="/") Applications
+	h1= title
+	p ID: #{application.id}
+	p Status: #{application.statusName} (#{application.status})
+
+	h4 Attributes
+	each attribute in application.attributes
+		.attribute
+			p Title: #{attribute.title}
+			p Required: #{attribute.required ? 'true' : 'false'}
+			p Valid: #{attribute.valid ? 'true' : 'false'}
+			p JSON Schema: #{attribute.schemaId}
+			p Value
+			pre.attribute-value #{JSON.stringify(attribute.data, null, 2)}
+	h4 Files
+	each fileId in application.files
+		.file
+			a(href="/files/#{fileId}", target="_blank") File #{fileId}

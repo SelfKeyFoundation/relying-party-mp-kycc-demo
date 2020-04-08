@@ -7,7 +7,6 @@
 var app = require('../src/app');
 var debug = require('debug')('relying-party-kycc-demo:server');
 var http = require('http');
-console.log('XXX', 'aap1');
 /**
  * Get port from environment and store in Express.
  */

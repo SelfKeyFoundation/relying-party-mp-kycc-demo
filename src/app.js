@@ -4,12 +4,8 @@ var session = require('express-session');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var indexRouter = require('./routes/index');
-var internalRouter = require('./routes/internal');
-var lwsRouter = require('./routes/lws');
 var webhookRouter = require('./routes/webhook');
-var sessionRouter = require('./routes/session');
 
 var app = express();
 
@@ -31,10 +27,7 @@ app.use(
 );
 
 app.use('/', indexRouter);
-app.use('/me', internalRouter);
-app.use('/lws', lwsRouter);
 app.use('/webhook', webhookRouter);
-app.use('/', sessionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -53,5 +46,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-console.log('XXX app');

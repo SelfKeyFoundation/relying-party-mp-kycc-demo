@@ -2,9 +2,33 @@ extends layout
 
 block content
 	h1= title
-	p
-		| Welcome to #{title}
-	if !userID
-		a(href="/login") Please login
+	if applications.length > 0
+		table.applications
+			thead
+				tr
+					th Application Id
+					th Status Name
+					th Status Code
+					th Actions
+					th
+			tbody
+				each application in applications
+					tr
+						td= application.applicationId
+						td= application.statusName
+						td= application.status
+						td
+							if [1, 4, 9, 14].includes(application.status)
+								button.applicationAction(data-application-id=application.id, data-application-action="cancel") Cancel
+								button.applicationAction(data-application-id=application.id, data-application-action="reject") Reject
+								button.applicationAction(data-application-id=application.id, data-application-action="approve") Approve
+							if [2, 8, 3].includes(application.status)
+								button.applicationAction(data-application-id=application.id, data-application-action="reopen") Reopen
+						td
+							a.details(href="applications/#{application.id}") Details
 	else
-		a(href="/me/info") User Info
+		p No Applications
+
+block scripts
+	script(src="https://code.jquery.com/jquery-3.4.1.min.js")
+	script(src="scripts/index.js")

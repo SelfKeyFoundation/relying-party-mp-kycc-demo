@@ -1,36 +1,22 @@
 version: '3.7'
 
 volumes:
-  demo_files:
-  demo_db_data:
   demo_node_modules:
 
 services:
-  demo_db:
-    image: mongo:3.6
-    volumes:
-      - demo_db_data:/data/db
-    restart: unless-stopped
-    logging:
-      driver: none
-    expose:
-      - '27017'
-    networks:
-      - kycc
-
   demo_app:
     build:
       context: .
       dockerfile: ./dev.Dockerfile
     ports:
       - '3000:3000'
-    environment:
-      - DB_URL=mongodb://demo_db:27017rp-mp-kycc-demo
+    env_file:
+      - ./.env
     volumes:
       - ./:/app
       - demo_node_modules:/app/node_modules
     networks:
-      - kycc
+      - rp-mk-kycc-demo
 networks:
-  kycc:
-    external: true
+  rp-mk-kycc-demo:
+    driver: bridge
