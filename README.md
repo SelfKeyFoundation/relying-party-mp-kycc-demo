@@ -3,6 +3,7 @@
 ## Contents
 
 - [Usage](#usage)
+- [Integration With KYC-Chain](#kycc-integration)
 - [License](#license)
 
 <a name="usage"></a>
@@ -17,15 +18,15 @@ cd relying-party-mp-kycc-demo
 yarn install
 ```
 
-### Configure KYCC instance
+### KYC-Chain config
 
-export 2 variables env variables if you run directly
+export 2  env variables if you run directly
 ```
 KYCC_API_URL=http://instance-id.kyc-chain.com/
 KYCC_API_KEY=my-kycc-api-keu
 ```
 
-or create an `.env` file containing then if you run with `docker-compose`
+or create an `.env` file containing them if you run with `docker-compose`
 
 ### Run
 
@@ -38,16 +39,18 @@ yarn start
 ```sh
 docker-compose up
 ```
+<a name="kycc-integration"></a>
 
-## Integratoin with KYCC
+## Integration with KYC-Chain
 
-### Hanble webhook events
+### Prerequisites
 
-Webhook url should be pre-configured in KYCC instance.
+- the webhook endpoint that is exposed on your server should be configured on KYC-Chain instance
+- you should get an API key for the instance
 
-Also you should will receive an api key for your instance
+### Handle webhook events
 
-This url will receive post request from KYCC instance on any status change of an application.
+The webhook endpoint will receive post request from KYC-Chain instance on any status change of an application.
 
 The request payload will contain application id and status
 
@@ -89,7 +92,7 @@ Example: [routes/webhook.js](https://github.com/SelfKeyFoundation/relying-party-
 
 There are 2 official options to work with KYC-Chain API
 
-- use our node js client lib
+- use our Node.js client lib
 - directly perform http requests
 
 ### Install node.js client
